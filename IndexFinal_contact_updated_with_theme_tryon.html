@@ -1088,7 +1088,7 @@ a[href="infografika-dlya-marketpleysov.html"] > *:not(.svc-overlay){ z-index: 3 
 }
 .hero .stage .ctr-bar .fill{
   position:absolute; left:0; top:0; bottom:0; width:0%;
-  background:linear-gradient(90deg, #8b5cf6, #f5d36c, #ff6b6b);
+  background:linear-gradient(90deg, var(--brand-grad-1), var(--brand-grad-2), var(--brand-grad-3));
   will-change:width; transition:width .45s ease;
 }
 .hero .stage .ctr-bar .val{
@@ -1328,7 +1328,7 @@ header { z-index: 1300 !important; }
 .hero .hero-ctr-layer .ctr-bar .fill{
   position:absolute; left:0; top:0; bottom:0; width:0%;
   height:100%;
-  background: linear-gradient(90deg, #8b5cf6, #f5d36c, #ff6b6b);
+  background: linear-gradient(90deg, var(--brand-grad-1), var(--brand-grad-2), var(--brand-grad-3));
   will-change: width;
   transition: width .45s ease;
   z-index: 0;
@@ -1837,6 +1837,9 @@ html:not(.ctr-init) .hero .stage .ctr-bar:not(.is-vertical){
   --panel-ink: #482E5D;                  /* базовый фиолетовый контейнер */
   --portfolio-panel-ink: var(--panel-ink);
   --contact-cta-bg: var(--panel-ink);
+  --ctr-gradient: linear-gradient(90deg, #ff6b6b, #f5d36c); /* default gradient for CTR scale */
+  --growth-tools-text: #f5d36c; /* default text color for 'Инструменты роста продаж' */
+
 }
 </style>
 
@@ -1872,6 +1875,29 @@ html:not(.ctr-init) .hero .stage .ctr-bar:not(.is-vertical){
 #contact .panel-ink{ background: var(--contact-cta-bg, var(--panel-ink, #482E5D)) !important; }
 </style>
 
+
+<!-- === CTR + Growth Tools hooks === -->
+<style id="tt-ctr-growth">
+/* CTR scale bar (assuming .ctr-scale or similar class) */
+.ctr-scale, .ctr-bar, .ctr-progress{
+  background: var(--ctr-gradient, linear-gradient(90deg, #ff6b6b, #f5d36c)) !important;
+}
+/* Growth tools heading/text */
+.growth-tools, .growth-tools h2, .growth-tools .title{
+  color: var(--growth-tools-text, #f5d36c) !important;
+}
+</style>
+
+
+<!-- === Theme Try‑On: shared brand gradient vars (CTR + accent text) === -->
+<style id="tt-brand-gradient-vars">
+:root{
+  --brand-grad-1: #ff6b6b; /* red/coral */
+  --brand-grad-2: #f5d36c; /* yellow */
+  --brand-grad-3: #8b5cf6; /* violet */
+}
+</style>
+
 </head>
 <body class="no-js">
 <div aria-hidden="true" class="cursor" id="cursor"></div>
@@ -1899,8 +1925,8 @@ html:not(.ctr-init) .hero .stage .ctr-bar:not(.is-vertical){
 <div class="hero-text">
 <div>
 <h1>
-            ИНФОГРА<br/>
-<span class="accent">Место роста продаж</span>
+            Не картинки для галочки.<br/>
+<span class="accent">Инструменты роста продаж.</span>
 </h1>
 <p class="lead">
             Оформляем карточки для Wildberries и Ozon так, чтобы они повышали CTR,
@@ -1952,14 +1978,14 @@ html:not(.ctr-init) .hero .stage .ctr-bar:not(.is-vertical){
   line-height: 1.02;
   margin: 0 0 14px;
 }
-    .hero-text .accent{ background:linear-gradient(90deg,#ff6b6b,#f5d36c,#8b5cf6); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .hero-text .accent{ background:linear-gradient(90deg, var(--brand-grad-1), var(--brand-grad-2), var(--brand-grad-3)); -webkit-background-clip:text; background-clip:text; color:transparent; }
     .hero-text .lead{ margin:0 0 18px; color:var(--muted); font-size:clamp(15px,1.4vw,20px); }
     .hero-text .cta{ display:flex; gap:12px; flex-wrap:wrap; }
     .hero-image{ flex:1; max-width:45%; display:flex; justify-content:center; align-items:center; }
     .hero-image img{ width:100%; height:auto; max-height:56vh; border-radius:18px; box-shadow:0 12px 40px rgba(0,0,0,.4); }
     .hero-marquee{ width:100%; overflow:hidden; border-top:1px solid rgba(255,255,255,.1); border-bottom:1px solid rgba(255,255,255,.1); margin-top:12px; padding:10px 0; text-align:center; }
     .marquee-track{ display:inline-block; white-space:nowrap; animation:marquee 16s linear infinite; }
-    .marquee-track span{ display:inline-block; font-size:14px; font-weight:700; padding-right:60px; background:linear-gradient(90deg,#ff6b6b,#f5d36c,#8b5cf6); -webkit-background-clip:text; background-clip:text; color:transparent; }
+    .marquee-track span{ display:inline-block; font-size:18px; font-weight:700; padding-right:60px; background:linear-gradient(90deg,#ff6b6b,#f5d36c,#8b5cf6); -webkit-background-clip:text; background-clip:text; color:transparent; }
     @keyframes marquee{ 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
     @media (max-width: 900px){
       .hero{ min-height:auto; padding-top:64px; }
@@ -3587,7 +3613,7 @@ document.addEventListener('DOMContentLoaded', function(){
     '--space-reviews-top','--space-reviews-bottom',
     '--space-quickcalc-top','--space-quickcalc-bottom',
     '--space-blog-top','--space-blog-bottom',
-    '--space-contact-top','--space-contact-bottom', '--hero-smoke', '--hero-grad0', '--hero-grad1', '--hero-grad2', '--panel-ink', '--portfolio-panel-ink', '--contact-cta-bg'];
+    '--space-contact-top','--space-contact-bottom', '--hero-smoke', '--hero-grad0', '--hero-grad1', '--hero-grad2', '--panel-ink', '--portfolio-panel-ink', '--contact-cta-bg', '--ctr-gradient', '--growth-tools-text', '--brand-grad-1', '--brand-grad-2', '--brand-grad-3'];
 
   const STORAGE_KEY = 'tt_theme_v1';
   const PRESETS_KEY = 'tt_presets_v1';
