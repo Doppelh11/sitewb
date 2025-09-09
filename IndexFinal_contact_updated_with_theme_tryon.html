@@ -703,7 +703,7 @@
 
     /* Подложки-секции */
     .panel-block{ border:1px solid rgba(255,255,255,.18); border-radius:16px; padding:clamp(16px,2.2vw,26px); box-shadow:0 10px 40px rgba(0,0,0,.35); }
-    .panel-ink{ background:#482E5D; }
+    .panel-ink{ background:var(--panel-ink, #482E5D); }
     .panel-grad{ background:linear-gradient(135deg,var(--grad-from),var(--grad-to)); }
 
     footer{border-top:1px solid var(--border);padding:40px 0;background:var(--bg)}
@@ -1821,6 +1821,55 @@ html:not(.ctr-init) .hero .stage .ctr-bar:not(.is-vertical){
 
 #blog .card.post h3 { margin: 12px 0 6px; font-weight: 900; }
 #blog .card.post p.muted { margin: 0; }
+</style>
+
+
+<!-- === Theme Try‑On: extra color variables (hero smoke + section inks) === -->
+<style id="tt-extra-vars">
+:root{
+  /* Hero overlays */
+  --hero-smoke: rgba(139, 92, 246, .28); /* цвет "дыма" (ok: hex/rgb/hsl/oklch) */
+  --hero-grad0: rgba(0,0,0,0.22);
+  --hero-grad1: rgba(0,0,0,0.45);
+  --hero-grad2: rgba(0,0,0,0.55);
+
+  /* Inks */
+  --panel-ink: #482E5D;                  /* базовый фиолетовый контейнер */
+  --portfolio-panel-ink: var(--panel-ink);
+  --contact-cta-bg: var(--panel-ink);
+}
+</style>
+
+
+<!-- === Hero Smoke Overlay (color-tunable) === -->
+<style id="tt-hero-smoke">
+.hero{ position: relative; }
+.aurora-layer{ position:absolute; inset:0; z-index:0; pointer-events:none; }
+.aurora-layer::after{
+  content:""; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(120% 80% at 50% 40%, color-mix(in srgb, var(--hero-smoke), transparent 65%) 0%, transparent 70%),
+    radial-gradient(80% 60% at 70% 60%, color-mix(in srgb, var(--hero-smoke), transparent 75%) 0%, transparent 70%);
+  mix-blend-mode: screen; /* мягкая дымка поверх видео/фона */
+  opacity: 1;
+}
+/* Переводим маску-приглушение в переменные, если используется */
+.hero::before{
+  background: radial-gradient(
+    1200px 700px at 30% 45%,
+    var(--hero-grad0) 0%,
+    var(--hero-grad1) 60%,
+    var(--hero-grad2) 100%
+  ) !important;
+}
+</style>
+
+
+<!-- === Panel Ink variable hooks === -->
+<style id="tt-panel-ink">
+.panel-ink{ background: var(--panel-ink, #482E5D) !important; }
+#portfolio .panel-ink{ background: var(--portfolio-panel-ink, var(--panel-ink, #482E5D)) !important; }
+#contact .panel-ink{ background: var(--contact-cta-bg, var(--panel-ink, #482E5D)) !important; }
 </style>
 
 </head>
@@ -3538,8 +3587,7 @@ document.addEventListener('DOMContentLoaded', function(){
     '--space-reviews-top','--space-reviews-bottom',
     '--space-quickcalc-top','--space-quickcalc-bottom',
     '--space-blog-top','--space-blog-bottom',
-    '--space-contact-top','--space-contact-bottom'
-  ];
+    '--space-contact-top','--space-contact-bottom', '--hero-smoke', '--hero-grad0', '--hero-grad1', '--hero-grad2', '--panel-ink', '--portfolio-panel-ink', '--contact-cta-bg'];
 
   const STORAGE_KEY = 'tt_theme_v1';
   const PRESETS_KEY = 'tt_presets_v1';
