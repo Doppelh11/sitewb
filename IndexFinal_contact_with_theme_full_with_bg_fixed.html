@@ -3918,6 +3918,28 @@ document.addEventListener('DOMContentLoaded', function(){
   z-index: 2;
 }
 </style>
+
+<style id="hero-bg-style">
+.hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--bg);
+}
+.hero .hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("assets/Desktop - 3.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: 0;
+  opacity: 0.5;
+  pointer-events: none;
+}
+.hero .aurora-layer { z-index: 1 !important; }
+.hero::before { z-index: 2 !important; }
+.hero-inner, .hero-text, .hero-image { position: relative; z-index: 3; }
+</style>
 </body>
 </html>
 <!-- === Injected: Static WEBM CSS (no darkening) === -->
